@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Oxide.Plugins
 {
-    [Info("Dung Protector", "KajWithAJ", "1.3.0")]
+    [Info("Dung Protector", "KajWithAJ", "1.4.0")]
     [Description("Prevent players from stealing horse dung.")]
 
     class DungProtector : RustPlugin
@@ -28,7 +28,7 @@ namespace Oxide.Plugins
             if (item.info.shortname == "horsedung" && player.IsBuildingBlocked()) {
                 if (!permission.UserHasPermission(player.UserIDString, PermissionExclude) && permission.UserHasPermission(player.UserIDString, PermissionUse)) {
                     var location = player.transform.position;
-                    var gridLocation = PhoneController.PositionToGridCoord(location);
+                    var gridLocation = MapHelper.PositionToGrid(location);
                     
                     var message = lang.GetMessage("PickupFailed", this);
                     Puts(string.Format(message, player.displayName, player.userID, item.info.shortname, gridLocation, location.ToString("F1")));
